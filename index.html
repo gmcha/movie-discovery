@@ -14,7 +14,7 @@
             setAmount(event.target.value);
         };
         const reset = () => setAmount(0);
-        const onFlip = () => {
+        const onInvert = () => {
             reset();
             setInverted((current) => !current);
         };
@@ -29,12 +29,36 @@
                     <input value={inverted ? amount : Math.round(amount/60)} id="hours" placeholder="hours" type="number" onChange={onChange} disabled={!inverted} />
                 </div>
                 <button onClick={reset}>Reset</button>
-                <button onClick={onFlip}>{inverted ? "Turn back" : "Invert"}</button>
+                <button onClick={onInvert}>{inverted ? "Turn back" : "Invert"}</button>
             </div>
         );
     }
     function KmToMiles(){
-        return <h3>KM 2 M</h3>
+        const [distance, setDistance] = React.useState(0);
+        const [flipped, setFlipped] = React.useState(false);
+        const onConvert = () => {
+            setDistance(event.target.value);
+        }
+        const onZero = () => setDistance(0);
+        const onFlip = () => {
+            onZero();
+            setFlipped((current) => !current);
+        }
+        return (
+            <div>
+                <div>
+                    <label for="kilometers">Km</label>
+                    <input value={flipped ? distance/0.621371 : distance} id="kilometers" type="number" placeholder="kilometers" onChange={onConvert} disabled={flipped} />
+                </div>
+                <div>
+                    <label for="miles">Miles</label>
+                    <input value={flipped ? distance : distance*0.621371} id="miles" type="number" placeholder="miles" onChange={onConvert} disabled={!flipped} />
+                </div>
+                <button onClick={onFlip}>Invert</button>
+                <button onClick={onZero}>Reset</button>
+            </div>
+            
+        )
     }
     function App() {
         const [index, setIndex] = React.useState("xx");
