@@ -34,7 +34,7 @@
         );
     }
     function KmToMiles(){
-        const [distance, setDistance] = React.useState(0);
+        const [distance, setDistance] = React.useState();
         const [flipped, setFlipped] = React.useState(false);
         const onConvert = () => {
             setDistance(event.target.value);
@@ -55,7 +55,7 @@
                     <input value={flipped ? distance : distance*0.621371} id="miles" type="number" placeholder="miles" onChange={onConvert} disabled={!flipped} />
                 </div>
                 <button onClick={onFlip}>Invert</button>
-                <button onClick={onZero}>Reset</button>
+                <button onClick={onZero}>{inverted ? "Turn back" : "Invert"}</button>
             </div>
             
         )
